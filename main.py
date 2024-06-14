@@ -4,7 +4,7 @@ import random
 # Initialisation de Pygame
 pygame.init()
 
-# Constantes pour la taille de l'écran
+# Constantes pour la dimensions de l'écran
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 CELL_SIZE = 20
