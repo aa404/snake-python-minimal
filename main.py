@@ -19,6 +19,8 @@ GREEN = (0, 255, 0)
 PINK = (255, 105, 180)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
+if not WHITE:
+    print("NA...")
 
 # Initialisation de l'écran de jeu
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
