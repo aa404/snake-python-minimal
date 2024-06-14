@@ -8,6 +8,7 @@ pygame.init()
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 CELL_SIZE = 20
+# Tests
 
 # Couleurs
 BLACK = (0, 0, 0)
@@ -19,9 +20,6 @@ WHITE = (255, 255, 255)
 # Initialisation de l'écran de jeu
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Snake")
-
-# Police pour l'affichage du score
-font = pygame.font.Font(None, 36)
 
 # Fonction pour dessiner le serpent
 def draw_snake(snake_body):
@@ -58,18 +56,6 @@ def check_game_over(snake_body):
             head_y < 0 or head_y >= SCREEN_HEIGHT or
             (head_x, head_y) in snake_body[1:])
 
-# Fonction pour afficher le score
-def show_score(score):
-    score_surface = font.render(f'Score: {score}', True, WHITE)
-    screen.blit(score_surface, (10, 10))
-
-# Fonction pour afficher l'écran de fin de jeu
-def show_game_over(score):
-    game_over_surface = font.render(f'Game Over! Final Score: {score}', True, WHITE)
-    screen.blit(game_over_surface, (SCREEN_WIDTH // 4, SCREEN_HEIGHT // 2))
-    pygame.display.flip()
-    pygame.time.wait(3000)
-
 # Initialisation du serpent et de la pomme
 snake_body = [(100, 100), (80, 100), (60, 100)]
 snake_direction = 'RIGHT'
@@ -77,7 +63,6 @@ apple_position = (300, 300)
 
 # Horloge pour contrôler la vitesse du jeu
 clock = pygame.time.Clock()
-score = 0
 
 # Boucle de jeu
 running = True
@@ -100,24 +85,18 @@ while running:
 
     # Vérifier si le serpent a mangé la pomme
     if check_apple_eaten(snake_body[0], apple_position):
-        score += 10
-        while True:
-            apple_position = (random.randrange(0, SCREEN_WIDTH, CELL_SIZE),
-                              random.randrange(0, SCREEN_HEIGHT, CELL_SIZE))
-            if apple_position not in snake_body:
-                break
+        apple_position = (random.randrange(0, SCREEN_WIDTH, CELL_SIZE),
+                          random.randrange(0, SCREEN_HEIGHT, CELL_SIZE))
         snake_body.append(snake_body[-1])  # Ajouter un nouveau bloc au serpent
 
     # Vérifier si le jeu est terminé
     if check_game_over(snake_body):
-        show_game_over(score)
         running = False
 
     # Dessin sur l'écran
     screen.fill(BLACK)
     draw_snake(snake_body)
     draw_apple(apple_position)
-    show_score(score)
 
     # Mettre à jour l'affichage
     pygame.display.flip()
