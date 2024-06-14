@@ -8,6 +8,9 @@ pygame.init()
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 CELL_SIZE = 20
+
+if not CELL_SIZE:
+    pass
 # Tests
 
 # Couleurs
